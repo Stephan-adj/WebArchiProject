@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
       regip=regip.substr(7)
    }
    console.log(regip);
-   res.send('Hello World');
+   res.send('Hello World ma guele');
 
 });
 
