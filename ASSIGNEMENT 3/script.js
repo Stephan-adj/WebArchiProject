@@ -1,5 +1,3 @@
-//var rand = Math.floor(Math.random() * (12 + 1));
-//console.log(rand);
 var rand = 11;
 var url = `https://api.themoviedb.org/3/movie/${rand}?api_key=5a905ae022c5ec2582edbfac057517d8`;
 
@@ -50,6 +48,9 @@ const ValidateActor = async (movieId) => {
   const actors = await RetrieveActor(name, url);
   console.log(actors);
   if (actors != null) {
+    //Disabled previous button
+    document.getElementById("name_field").disabled = true;
+    document.getElementById("submit_username").disabled = true;
     document.getElementById("previous1").innerHTML = "";
     document.body.innerHTML +=
       `<div id='name'> Name : ${actors[0]}<br></br><img src='https://image.tmdb.org/t/p/w500${actors[1]}'></div>` +
@@ -86,12 +87,15 @@ const ValidateMovie = async (actorId) => {
   const movies = await RetrieveMovie(movie, url);
   console.log(movies);
   if (movies != null) {
+    //Disabled previous button
+    document.getElementById("movie_field").disabled = true;
+    document.getElementById("submit_movie").disabled = true;
     document.getElementById("previous2").innerHTML = "";
     document.body.innerHTML +=
       `<div id = 'titl'><div> Title : ${movies[0]}</div>` +
       `<div> Release year : ${movies[1]}</div>` +
       `<div> <img src='https://image.tmdb.org/t/p/w500${movies[2]}'></div>` +
-      `<button id='PlayAgain' onclick='javascript:location.reload();'>Play Again ?</button>` //PlayAgain(\"${movies[0]},${movies[1]},${movies[2]},${movies[3]}\)"
+      `<button id='PlayAgain' onclick='PlayAgain()'>Play Again ?</button>`;
 
   } else {
     document.getElementById("previous2").innerHTML = "<p id='wrong' style='color: red'> You put the wrong movie.</p>";
@@ -131,3 +135,11 @@ const start = function() {
 }
 
 start();
+
+const PlayAgain = function() {
+  document.getElementById("main").innerHTML = "<h1>Welcome to the movie quizz static web application 😀</h1>";
+  var rand = Math.floor(Math.random() * (15 - 5 + 1)) + 5; //Math.floor(Math.random() * (max - min + 1)) + min;
+  console.log(rand);
+  var url = `https://api.themoviedb.org/3/movie/${rand}?api_key=5a905ae022c5ec2582edbfac057517d8`;
+  const result = Retrievemovieinfo(url);
+}
